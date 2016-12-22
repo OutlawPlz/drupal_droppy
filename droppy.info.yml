@@ -1,0 +1,4 @@
+name: Droppy
+type: module
+description: 'Pure JavaScript multi-level drop-down menu.'
+core: 8.x
