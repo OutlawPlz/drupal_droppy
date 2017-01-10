@@ -1,0 +1,49 @@
+entity.droppy.canonical:
+  path: '/admin/config/user-interface/droppy/{droppy}'
+  defaults:
+    _entity_form: 'droppy.edit'
+    _title: 'Edit Droppy config'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.droppy.add_form:
+  path: '/admin/config/user-interface/droppy/add'
+  defaults:
+    _entity_form: 'droppy.add'
+    _title: 'Add Droppy config'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.droppy.edit_form:
+  path: '/admin/config/user-interface/droppy/{droppy}/edit'
+  defaults:
+    _entity_form: 'droppy.edit'
+    _title: 'Edit Droppy config'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.droppy.delete_form:
+  path: '/admin/config/user-interface/droppy/{droppy}/delete'
+  defaults:
+    _entity_form: 'droppy.delete'
+    _title: 'Delete Droppy config'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.droppy.collection:
+  path: '/admin/config/user-interface/droppy'
+  defaults:
+    _entity_list: 'droppy'
+    _title: 'Droppy configs'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'

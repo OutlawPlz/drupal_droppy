@@ -1,0 +1,40 @@
+droppy.droppy.*:
+  type: config_entity
+  label: 'Droppy configuration'
+  mapping:
+    id:
+      type: string
+      label: 'Machine-readable name'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+      label: 'UUID'
+    dropdown_selector:
+      type: string
+      label: 'Dropdown selector'
+    parent_selector:
+      type: string
+      label: 'Parent selector'
+    trigger_selector:
+      type: string
+      label: 'Trigger selector'
+    close_others:
+      type: boolean
+      label: 'Close others'
+    click_out_to_close:
+      type: boolean
+      label: 'Click out to close'
+    click_esc_to_close:
+      type: boolean
+      label: 'Click ESC to close'
+    animation_in:
+      type: string
+      label: 'Animation in'
+    animation_out:
+      type: string
+      label: 'Animation out'
+    prevent_default:
+      type: boolean
+      label: 'Prevent default'

@@ -1,0 +1,5 @@
+dependent_content.admin_config_ui.collection:
+  title: Droppy
+  route_name: entity.droppy.collection
+  description: 'Add and modify Droppy configurations.'
+  parent: system.admin_config_ui
