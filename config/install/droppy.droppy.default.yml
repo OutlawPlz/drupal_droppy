@@ -3,12 +3,13 @@ status: true
 dependencies: {  }
 id: default
 label: Default
-dropdown_selector: 'li > ul'
-parent_selector: li
-trigger_selector: a
-close_others: true
-click_out_to_close: true
-click_esc_to_close: true
-animation_in: ''
-animation_out: ''
-prevent_default: true
+options:
+  dropdownSelector: 'li.menu-item--expanded > ul.menu'
+  parentSelector: li.menu-item--expanded
+  triggerSelector: a
+  closeOthers: true
+  clickOutToClose: true
+  clickEscToClose: true
+  animationIn: ''
+  animationOut: ''
+  preventDefault: true

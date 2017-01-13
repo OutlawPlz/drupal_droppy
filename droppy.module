@@ -1,1 +1,89 @@
 <?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\droppy\Entity\Droppy;
+use Drupal\system\Entity\Menu;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $entities = Droppy::loadMultiple();
+  $config_list = array();
+
+  /** @var Drupal\droppy\Entity\Droppy $entity */
+  foreach ($entities as $entity) {
+    $key = $entity->get('id');
+    $value = $entity->get('label');
+    $config_list[$key] = $value;
+  }
+
+  /** @var Drupal\system\Entity\Menu $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+
+  $form['droppy'] = array(
+    '#type' => 'details',
+    '#title' => t('Droppy'),
+    '#open' => TRUE,
+    '#weight' => 1
+  );
+
+  $form['droppy']['droppy_option'] = array(
+    '#type' => 'select',
+    '#title' => 'Options',
+    '#options' => $config_list,
+    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_option')
+  );
+
+  $form['droppy']['droppy_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_enable')
+  );
+
+  $form['#entity_builders'][] = 'droppy_form_menu_form_builder';
+
+  // Move links at the bottom.
+  $form['links']['#weight'] = 2;
+
+  kint($form);
+}
+
+/**
+ * Entity builder for the menu configuration entity.
+ */
+function droppy_form_menu_form_builder($entity_type, Menu $entity, &$form, FormStateInterface $form_state) {
+
+  $entity->setThirdPartySetting('droppy', 'droppy_option', $form_state->getValue('droppy_option'));
+  $entity->setThirdPartySetting('droppy', 'droppy_enable', $form_state->getValue('droppy_enable'));
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function droppy_preprocess_menu(&$variables) {
+
+  // Load the menu entity.
+  $entity = Menu::load($variables['menu_name']);
+
+  if ($entity->getThirdPartySetting('droppy', 'droppy_enable')) {
+
+    // Load the Droppy config entity.
+    $entity = Droppy::load($entity->getThirdPartySetting('droppy', 'droppy_option'));
+
+    // Get the ID and the options.
+    $key = $entity->get('id');
+
+    // If not exists, add the current option to drupalSettins.
+    if (!isset($variables['#attached']['drupalSettings']['droppy'][$key])) {
+      $variables['#attached']['drupalSettings']['droppy'][$key] = $entity->get('options');
+    }
+
+    // Add the Droppy library.
+    $variables['#attached']['library'][] = 'droppy/droppy';
+
+    // Set the Droppy attribute.
+    $variables['attributes']['data-droppy-options'] = $key;
+  }
+}

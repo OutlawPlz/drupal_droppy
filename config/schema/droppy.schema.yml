@@ -11,30 +11,45 @@ droppy.droppy.*:
     uuid:
       type: string
       label: 'UUID'
-    dropdown_selector:
-      type: string
-      label: 'Dropdown selector'
-    parent_selector:
-      type: string
-      label: 'Parent selector'
-    trigger_selector:
-      type: string
-      label: 'Trigger selector'
-    close_others:
+    options:
+      type: mapping
+      label: 'Options'
+      mapping:
+        dropdownSelector:
+          type: string
+          label: 'Dropdown selector'
+        parentSelector:
+          type: string
+          label: 'Parent selector'
+        triggerSelector:
+          type: string
+          label: 'Trigger selector'
+        closeOthers:
+          type: boolean
+          label: 'Close others'
+        clickOutToClose:
+          type: boolean
+          label: 'Click out to close'
+        clickEscToClose:
+          type: boolean
+          label: 'Click ESC to close'
+        animationIn:
+          type: string
+          label: 'Animation in'
+        animationOut:
+          type: string
+          label: 'Animation out'
+        preventDefault:
+          type: boolean
+          label: 'Prevent default'
+
+system.menu.*.third_party.droppy:
+  type: mapping
+  label: 'Droppy options'
+  mapping:
+    droppy_enable:
       type: boolean
-      label: 'Close others'
-    click_out_to_close:
-      type: boolean
-      label: 'Click out to close'
-    click_esc_to_close:
-      type: boolean
-      label: 'Click ESC to close'
-    animation_in:
+      label: 'Droppy enable'
+    droppy_options:
       type: string
-      label: 'Animation in'
-    animation_out:
-      type: string
-      label: 'Animation out'
-    prevent_default:
-      type: boolean
-      label: 'Prevent default'
+      label: 'Config ID'

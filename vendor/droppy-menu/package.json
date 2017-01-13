@@ -1,0 +1,32 @@
+{
+  "name": "droppy-menu",
+  "version": "1.1.0",
+  "description": "Pure JavaScript multi-level dropdown menu.",
+  "keywords": [
+    "menu",
+    "dropdown",
+    "multi-level"
+  ],
+  "main": "dist/droppy.js",
+  "style": "dist/droppy.css",
+  "author": "OutlawPlz",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OutlawPlz/droppy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OutlawPlz/droppy/issues"
+  },
+  "devDependencies": {
+    "breakpoint-sass": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.8.8",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-uglify": "^2.0.0"
+  }
+}

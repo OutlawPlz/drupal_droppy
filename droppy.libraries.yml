@@ -1,0 +1,15 @@
+droppy:
+  remote: https://github.com/OutlawPlz/droppy
+  version: 1.1.0
+  license:
+    name: GPL-3.0
+    url: https://github.com/OutlawPlz/droppy/blob/master/LICENSE
+    gpl-compatible: true
+  css:
+    component:
+      vendor/droppy-menu/dist/droppy.min.css: { minified: true }
+  js:
+    vendor/droppy-menu/dist/droppy.js: {}
+    js/droppyInit.js: {}
+  dependencies:
+    - core/drupalSettings

@@ -1,0 +1,17 @@
+
+// Droppy
+// -----------------------------------------------------------------------------
+
+.droppy {}
+
+.droppy__drop {
+  display: none;
+
+  &--active {
+    display: block;
+  }
+}
+
+.droppy__trigger {}
+
+.droppy__parent {}

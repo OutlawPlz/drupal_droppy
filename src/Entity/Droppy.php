@@ -47,62 +47,14 @@ class Droppy extends ConfigEntityBase implements DroppyInterface {
   protected $id;
 
   /**
-   * The human-redable name of this Droppy configuration.
+   * The human-readable name of this Droppy configuration.
    * @var string
    */
   protected $label;
 
   /**
-   * A valid CSS selector of your dropdown.
-   * @var string;
+   * An array of Droppy options.
+   * @var array
    */
-  protected $dropdown_selector;
-
-  /**
-   * A valid CSS selector of your parent element.
-   * @var string
-   */
-  protected $parent_selector;
-
-  /**
-   * A valid CSS selector of your trigger element.
-   * @var string
-   */
-  protected $trigger_selector;
-
-  /**
-   * Keep open only one dropdown at a time.
-   * @var boolean
-   */
-  protected $close_others;
-
-  /**
-   * Close all the dropdowns by clicking on the outside of the menu.
-   * @var boolean
-   */
-  protected $click_out_to_close;
-
-  /**
-   * Close all the dropdowns by clicking ESC.
-   * @var boolean
-   */
-  protected $click_esc_to_close;
-
-  /**
-   * A CSS class where is declared an animation.
-   * @var string
-   */
-  protected $animation_in;
-
-  /**
-   * A CSS class where is declared an animation.
-   * @var string
-   */
-  protected $animation_out;
-
-  /**
-   * Prevent the execution of the trigger element default behaviour.
-   * @var boolean
-   */
-  protected $prevent_default;
+  protected $options;
 }

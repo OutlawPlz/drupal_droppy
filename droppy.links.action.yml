@@ -1,5 +1,5 @@
 entity.droppy.add_form:
   route_name: 'entity.droppy.add_form'
-  title: 'Add Droppy configuration'
+  title: 'Add configuration'
   appears_on:
     - entity.droppy.collection
