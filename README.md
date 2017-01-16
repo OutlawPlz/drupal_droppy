@@ -1,3 +1,3 @@
 # Droppy
 
-Pure JavaScript multi-level drop-down menu.
+Provides Droppy library integration for Drupal.

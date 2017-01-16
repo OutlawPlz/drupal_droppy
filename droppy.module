@@ -14,9 +14,7 @@ function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $fo
 
   /** @var Drupal\droppy\Entity\Droppy $entity */
   foreach ($entities as $entity) {
-    $key = $entity->get('id');
-    $value = $entity->get('label');
-    $config_list[$key] = $value;
+    $config_list[$entity->get('id')] = $entity->get('label');
   }
 
   /** @var Drupal\system\Entity\Menu $entity */
@@ -24,30 +22,29 @@ function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $fo
 
   $form['droppy'] = array(
     '#type' => 'details',
-    '#title' => t('Droppy'),
-    '#open' => TRUE,
+    '#title' => t('Drop-down'),
     '#weight' => 1
-  );
-
-  $form['droppy']['droppy_option'] = array(
-    '#type' => 'select',
-    '#title' => 'Options',
-    '#options' => $config_list,
-    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_option')
   );
 
   $form['droppy']['droppy_enable'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable'),
+    '#description' => t('Make this menu a drop-down menu.'),
     '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_enable')
+  );
+
+  $form['droppy']['droppy_option'] = array(
+    '#type' => 'select',
+    '#title' => t('Options'),
+    '#description' => t('Choose the Droppy options to associate with this menu.'),
+    '#options' => $config_list,
+    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_option')
   );
 
   $form['#entity_builders'][] = 'droppy_form_menu_form_builder';
 
   // Move links at the bottom.
   $form['links']['#weight'] = 2;
-
-  kint($form);
 }
 
 /**
@@ -64,7 +61,7 @@ function droppy_form_menu_form_builder($entity_type, Menu $entity, &$form, FormS
  */
 function droppy_preprocess_menu(&$variables) {
 
-  // Load the menu entity.
+  /** @var Drupal\system\Entity\Menu $entity */
   $entity = Menu::load($variables['menu_name']);
 
   if ($entity->getThirdPartySetting('droppy', 'droppy_enable')) {
