@@ -9,7 +9,7 @@ droppy:
     component:
       vendor/droppy-menu/dist/droppy.min.css: { minified: true }
   js:
-    vendor/droppy-menu/dist/droppy.js: {}
+    vendor/droppy-menu/dist/droppy.min.js: { minified: true }
     js/droppyInit.js: {}
   dependencies:
     - core/drupalSettings

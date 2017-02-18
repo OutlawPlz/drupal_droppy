@@ -61,26 +61,33 @@ function droppy_form_menu_form_builder($entity_type, Menu $entity, &$form, FormS
  */
 function droppy_preprocess_menu(&$variables) {
 
-  /** @var Drupal\system\Entity\Menu $entity */
+  // TODO - [ ] If menu_name is not set, add a log message.
+  if (!isset($variables['menu_name'])) {
+    return;
+  }
+
+  /** @var Menu $entity */
   $entity = Menu::load($variables['menu_name']);
 
-  if ($entity->getThirdPartySetting('droppy', 'droppy_enable')) {
-
-    // Load the Droppy config entity.
-    $entity = Droppy::load($entity->getThirdPartySetting('droppy', 'droppy_option'));
-
-    // Get the ID and the options.
-    $key = $entity->get('id');
-
-    // If not exists, add the current option to drupalSettins.
-    if (!isset($variables['#attached']['drupalSettings']['droppy'][$key])) {
-      $variables['#attached']['drupalSettings']['droppy'][$key] = $entity->get('options');
-    }
-
-    // Add the Droppy library.
-    $variables['#attached']['library'][] = 'droppy/droppy';
-
-    // Set the Droppy attribute.
-    $variables['attributes']['data-droppy-options'] = $key;
+  // If menu doesn't use Droppy, return.
+  if (!$entity->getThirdPartySetting('droppy', 'droppy_enable')) {
+    return;
   }
+
+  // Load the Droppy config entity.
+  /** @var Droppy $entity */
+  $entity = Droppy::load($entity->getThirdPartySetting('droppy', 'droppy_option'));
+  $config = $entity->get('id');
+
+  // If not exists, add the current option to drupalSettins.
+  if (!isset($variables['#attached']['drupalSettings']['droppy'][$config])) {
+    $variables['#attached']['drupalSettings']['droppy'][$config] = $entity->get('options');
+  }
+
+  // Add Flickity attribute and attach the library.
+  $variables['attributes']['data-droppy-options'] = $config;
+  $variables['#attached']['library'][] = 'droppy/droppy';
+
+  // Add cacheability metadata.
+  $variables['#cache']['tags'][] = $entity->getCacheTagsToInvalidate();
 }

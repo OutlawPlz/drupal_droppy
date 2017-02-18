@@ -1,13 +1,24 @@
-( function () {
+( function ( Drupal ) {
 
-  'use strict';
+  Drupal.behaviors.droppy = {
+    attach: function ( context, settings ) {
 
-  var elements = document.querySelectorAll( '[data-droppy-options]' );
+      var elements = context.querySelectorAll( '[data-droppy-options]' ),
+          options;
 
-  for ( var i = elements.length, element; i--, element = elements[ i ]; ) {
+      for ( var i = elements.length, element; i--, element = elements[ i ]; ) {
 
-    // Create a new Droppy instance with the specified options.
-    new Droppy( element, drupalSettings[ 'droppy' ][ element.getAttribute( 'data-droppy-options' ) ] );
-  }
+        var config = element.getAttribute( 'data-droppy-options' );
 
-} () );
+        if ( config ) {
+          options = settings[ 'droppy' ][ config ];
+          new Droppy( element, options );
+        }
+        else {
+          new Droppy( element );
+        }
+      }
+    }
+  };
+
+} ( Drupal ) );
