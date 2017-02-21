@@ -33,12 +33,12 @@ function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $fo
     '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_enable')
   );
 
-  $form['droppy']['droppy_option'] = array(
+  $form['droppy']['droppy_config'] = array(
     '#type' => 'select',
     '#title' => t('Options'),
-    '#description' => t('Choose the Droppy options to associate with this menu.'),
+    '#description' => t('Choose the Droppy configuration to associate with this menu.'),
     '#options' => $config_list,
-    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_option')
+    '#default_value' => $entity->getThirdPartySetting('droppy', 'droppy_config')
   );
 
   $form['#entity_builders'][] = 'droppy_form_menu_form_builder';
@@ -52,8 +52,8 @@ function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $fo
  */
 function droppy_form_menu_form_builder($entity_type, Menu $entity, &$form, FormStateInterface $form_state) {
 
-  $entity->setThirdPartySetting('droppy', 'droppy_option', $form_state->getValue('droppy_option'));
   $entity->setThirdPartySetting('droppy', 'droppy_enable', $form_state->getValue('droppy_enable'));
+  $entity->setThirdPartySetting('droppy', 'droppy_config', $form_state->getValue('droppy_config'));
 }
 
 /**
@@ -89,5 +89,10 @@ function droppy_preprocess_menu(&$variables) {
   $variables['#attached']['library'][] = 'droppy/droppy';
 
   // Add cacheability metadata.
-  $variables['#cache']['tags'][] = $entity->getCacheTagsToInvalidate();
+  if (isset($variables['#cache']['tags'])) {
+    $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'], $entity->getCacheTagsToInvalidate());
+  }
+  else {
+    $variables['#cache']['tags'] = $entity->getCacheTagsToInvalidate();
+  }
 }

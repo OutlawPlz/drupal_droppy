@@ -50,6 +50,6 @@ system.menu.*.third_party.droppy:
     droppy_enable:
       type: boolean
       label: 'Droppy enable'
-    droppy_options:
+    droppy_config:
       type: string
       label: 'Config ID'
