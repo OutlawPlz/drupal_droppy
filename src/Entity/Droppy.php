@@ -57,4 +57,35 @@ class Droppy extends ConfigEntityBase implements DroppyInterface {
    * @var array
    */
   protected $options;
+
+  /**
+   * Gets the options.
+   *
+   * @return array
+   *   The options array.
+   */
+  public function getOptions() {
+
+    return $this->options;
+  }
+
+  /**
+   * Gets the configuration list.
+   *
+   * @return array
+   *   An array of Droppy configuration. The config ID is the key, and the
+   *   config label the value.
+   */
+  public static function getConfigList() {
+
+    $entities = Droppy::loadMultiple();
+    $config_list = array();
+
+    /** @var DroppyInterface $entity */
+    foreach ($entities as $entity) {
+      $config_list[$entity->get('id')] = $entity->get('label');
+    }
+
+    return $config_list;
+  }
 }

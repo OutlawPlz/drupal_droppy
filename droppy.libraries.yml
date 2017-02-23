@@ -7,9 +7,9 @@ droppy:
     gpl-compatible: true
   css:
     component:
-      /libraries/droppy-menu/dist/droppy.min.css: { minified: true }
+      /libraries/droppy/dist/droppy.min.css: { minified: true }
   js:
-    /libraries/droppy-menu/dist/droppy.min.js: { minified: true }
+    /libraries/droppy/dist/droppy.min.js: { minified: true }
     js/droppyInit.js: {}
   dependencies:
     - core/drupalSettings

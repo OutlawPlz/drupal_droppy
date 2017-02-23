@@ -9,13 +9,7 @@ use Drupal\system\Entity\Menu;
  */
 function droppy_form_menu_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  $entities = Droppy::loadMultiple();
-  $config_list = array();
-
-  /** @var Drupal\droppy\Entity\Droppy $entity */
-  foreach ($entities as $entity) {
-    $config_list[$entity->get('id')] = $entity->get('label');
-  }
+  $config_list = Droppy::getConfigList();
 
   /** @var Drupal\system\Entity\Menu $entity */
   $entity = $form_state->getFormObject()->getEntity();
@@ -75,13 +69,13 @@ function droppy_preprocess_menu(&$variables) {
   }
 
   // Load the Droppy config entity.
-  /** @var Droppy $entity */
-  $entity = Droppy::load($entity->getThirdPartySetting('droppy', 'droppy_option'));
+  /** @var \Drupal\droppy\Entity\DroppyInterface $entity */
+  $entity = Droppy::load($entity->getThirdPartySetting('droppy', 'droppy_config'));
   $config = $entity->get('id');
 
   // If not exists, add the current option to drupalSettins.
   if (!isset($variables['#attached']['drupalSettings']['droppy'][$config])) {
-    $variables['#attached']['drupalSettings']['droppy'][$config] = $entity->get('options');
+    $variables['#attached']['drupalSettings']['droppy'][$config] = $entity->getOptions();
   }
 
   // Add Flickity attribute and attach the library.
