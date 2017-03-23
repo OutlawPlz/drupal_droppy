@@ -12,4 +12,5 @@ droppy:
     /libraries/droppy/dist/droppy.min.js: { minified: true }
     js/droppyInit.js: {}
   dependencies:
+    - core/drupal
     - core/drupalSettings
